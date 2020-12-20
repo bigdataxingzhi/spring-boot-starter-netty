@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_package = "org.springframework.boot.netty.codec.proto";
+// 生成的时候设置java_multiple_files = true可以让类分开生成，
+//更清晰些,也更方便后面利用反射来获取这些类
+option java_multiple_files = true;
+//Frame为描述协议
+message Frame {
+    // messageName约定为要发送的message的类全名
+    string head = 1;
+    // 所有消息在发送的时候都序列化成byte数组写入Frame的payload
+    bytes payload = 2;
+    // payload crc32校验码
+    string crcCode = 3;
+}
+message TextMessage {
+    string text = 1;
+}
+
+message SpeakMessage {
+    string text = 1;
+    // ID
+    string id = 2;
+}
